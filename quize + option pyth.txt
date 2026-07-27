@@ -30,8 +30,8 @@ questions = [
     },
 ]
 
-for q in questions 
- print(q["question"])
+for q in questions:
+    print(q["question"])
     for option in q["options"]:
         print(option)
     answer = input("Your answer (A/B/C/D): ").lower()
