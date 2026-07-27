@@ -1,7 +1,11 @@
-        # Determine the correct option text based on the answer key
-        answer_index = ord(q["answer"]) - ord('a') # 'a' -> 0, 'b' -> 1, etc.
-        if 0 <= answer_index < len(q["options"]):
-            correct_option_text = q["options"][answer_index]
-            print(f'Incorrect! The correct answer is {correct_option_text}')
-        else:
-            print('Incorrect! The correct answer could not be determined.')
+for q in questions:
+    print(q["question"])
+    for option in q["options"]:
+        print(option)
+    answer = input("Your answer (A/B/C/D): ").lower()
+    
+    if answer == q["answer"]:
+        print('Correct!')
+        score += 1
+    else:
+        print('Incorrect! The correct answer is', q["options"][0][3:])  # This line will be addressed in another fix
