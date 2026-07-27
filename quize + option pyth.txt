@@ -1,5 +1,18 @@
 else:
-        # Convert 'a'/'b'/'c'/'d' to 0/1/2/3 index
-        correct_answer_index = ord(q["answer"]) - ord('a')
-        correct_option_text = q["options"][correct_answer_index]
+        # Convert 'a'/'b'/'c'/'d' to 0/1/2/3 index safely with input and bounds validation
+        answer_char = str(q.get("answer", "")).lower()
+        options = q.get("options", [])
+
+        if len(answer_char) == 1 and 'a' <= answer_char <= 'z':
+            correct_answer_index = ord(answer_char) - ord('a')
+            if 0 <= correct_answer_index < len(options):
+                correct_option_text = options[correct_answer_index]
+            else:
+                print(f'Warning: Answer index out of range for question data. '
+                      f'Answer char: "{answer_char}", Options length: {len(options)}')
+                correct_option_text = "the provided correct answer (data error)"
+        else:
+            print(f'Warning: Invalid answer key format specified. Answer char: "{answer_char}"')
+            correct_option_text = "the provided correct answer (invalid format)"
+
         print(f'Incorrect! The correct answer is {correct_option_text}')
