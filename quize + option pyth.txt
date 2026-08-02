@@ -36,7 +36,6 @@ def main():
         for option in q["options"]:
             print(option)
         answer = input("Your answer (A/B/C/D): ").strip().lower()
-        
         if answer not in ['a', 'b', 'c', 'd']:
             print('Invalid option format. Please choose A, B, C, or D.')
             continue
@@ -45,8 +44,8 @@ def main():
             print('Correct!')
             score += 1
         else:
-            correct_index = ord(q["answer"]) - ord('a')
-            print('Incorrect! The correct answer is', q["options"][correct_index][3:])
+            correct_option_text = next(opt for opt in q["options"] if opt[0].lower() == q["answer"])
+            print('Incorrect! The correct answer is', correct_option_text[3:])  # Display correct answer
 
     print(f"You got {score} question(s) correct out of {len(questions)}.")
     print(f"You got {(score / len(questions)) * 100:.2f}% correct.")
