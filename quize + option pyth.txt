@@ -35,10 +35,14 @@ def run_quiz(questions):
         print(q["question"])
         for option in q["options"]:
             print(option)
-        answer = input("Your answer (A/B/C/D): ").strip().lower()
-        while answer not in ['a', 'b', 'c', 'd']:
-            print("Invalid input. Please enter A, B, C, or D.")
+        try:
             answer = input("Your answer (A/B/C/D): ").strip().lower()
+            while answer not in ['a', 'b', 'c', 'd']:
+                print("Invalid input. Please enter A, B, C, or D.")
+                answer = input("Your answer (A/B/C/D): ").strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            print("\nQuiz terminated by user.")
+            exit(0)
         
         if answer == q["answer"]:
             print('Correct!')
