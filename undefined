@@ -1,0 +1,15 @@
+print("Welcome to the quiz game!")
+
+playing = input("Do you want to play? (yes/no) ")
+if playing.lower() != "yes":
+    quit()
+
+print("Okay! Let's play :)!")
+score = 0
+
+questions = [
+    {
+        "question": "What does OS stand for?",
+        "options": ["A) Operating System", "B) Open Source", "C) Online System", "D) Offline System"],
+        "answer": "a"
+    },
