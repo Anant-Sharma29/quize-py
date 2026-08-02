@@ -1,50 +1,55 @@
-print("Welcome to the quiz game!")
+def main():
+    print("Welcome to the quiz game!")
 
-playing = input("Do you want to play? (yes/no) ")
-if playing.lower() != "yes":
-    quit()
+    playing = input("Do you want to play? (yes/no) ")
+    if playing.lower() != "yes":
+        return
 
-print("Okay! Let's play :)!")
-
-questions = [
-    {
-        "question": "What does OS stand for?",
-        "options": ["A) Operating System", "B) Open Source", "C) Online System", "D) Offline System"],
-        "answer": "a"
-    },
-    {
-        "question": "What does RAM stand for?",
-        "options": ["A) Random Access Memory", "B) Readily Accessible Memory", "C) Rapid Access Memory", "D) None of the above"],
-        "answer": "a"
-    },
-    {
-        "question": "What does CPU stand for?",
-        "options": ["A) Central Processing Unit", "B) Central Programming Unit", "C) Computer Personal Unit", "D) None of the above"],
-        "answer": "a"
-    },
-    {
-        "question": "What does GPU stand for?",
-        "options": ["A) Graphics Processing Unit", "B) General Purpose Unit", "C) Graphical Processing Unit", "D) None of the above"],
-        "answer": "a"
-    },
-]
-
-def run_quiz(questions):
+    print("Okay! Let's play :)!")
     score = 0
+
+    questions = [
+        {
+            "question": "What does OS stand for?",
+            "options": ["A) Operating System", "B) Open Source", "C) Online System", "D) Offline System"],
+            "answer": "a"
+        },
+        {
+            "question": "What does RAM stand for?",
+            "options": ["A) Random Access Memory", "B) Readily Accessible Memory", "C) Rapid Access Memory", "D) None of the above"],
+            "answer": "a"
+        },
+        {
+            "question": "What does CPU stand for?",
+            "options": ["A) Central Processing Unit", "B) Central Programming Unit", "C) Computer Personal Unit", "D) None of the above"],
+            "answer": "a"
+        },
+        {
+            "question": "What does GPU stand for?",
+            "options": ["A) Graphics Processing Unit", "B) General Purpose Unit", "C) Graphical Processing Unit", "D) None of the above"],
+            "answer": "a"
+        },
+    ]
+
     for q in questions:
         print(q["question"])
         for option in q["options"]:
             print(option)
         answer = input("Your answer (A/B/C/D): ").strip().lower()
         
+        if answer not in ['a', 'b', 'c', 'd']:
+            print('Invalid option format. Please choose A, B, C, or D.')
+            continue
+        
         if answer == q["answer"]:
             print('Correct!')
             score += 1
         else:
-            print('Incorrect! The correct answer is', q["options"][0][3:])
-    return score
+            correct_index = ord(q["answer"]) - ord('a')
+            print('Incorrect! The correct answer is', q["options"][correct_index][3:])
 
-score = run_quiz(questions)
+    print(f"You got {score} question(s) correct out of {len(questions)}.")
+    print(f"You got {(score / len(questions)) * 100:.2f}% correct.")
 
-print(f"You got {score} question(s) correct out of {len(questions)}.")
-print(f"You got {(score / len(questions)) * 100:.2f}% correct.")
+if __name__ == "__main__":
+    main()
