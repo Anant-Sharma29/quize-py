@@ -17,6 +17,6 @@ questions = [
     {
         "question": "What does GPU stand for?",
         "options": ["A) Graphics Processing Unit", "B) General Purpose Unit", "C) Graphical Processing Unit", "D) None of the above"],
-        "answer": "e"
+        "answer" ""
     },
 ]
