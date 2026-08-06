@@ -1,52 +1,57 @@
-def main():
-    print("Welcome to the quiz game!")
+questions = [
+    {
+        "question": "What does OS stand for?",
+        "options": ["A) Operating System", "B) Open Source", "C) Online System", "D) Offline System"],
+        "answer": "a"
+    },
+    {
+        "question": "What does RAM stand for?",
+        "options": ["A) Random Access Memory", "B) Readily Accessible Memory", "C) Rapid Access Memory", "D) None of the above"],
+        "answer": "a"
+    },
+    {
+        "question": "What does CPU stand for?",
+        "options": ["A) Central Processing Unit", "B) Central Programming Unit", "C) Computer Personal Unit", "D) None of the above"],
+        "answer": "a"
+    },
+    {
+        "question": "What does GPU stand for?",
+        "options": ["A) Graphics Processing Unit", "B) General Purpose Unit", "C) Graphical Processing Unit", "D) None of the above"],
+        "answer": "a"
+    },
+]
 
-    playing = input("Do you want to play? (yes/no) ")
-    if playing.lower() != "yes":
-        return
-
-    print("Okay! Let's play :)!")
+def run_quiz(questions):
     score = 0
-
-    questions = [
-        {
-            "question": "What does OS stand for?",
-            "options": ["A) Operating System", "B) Open Source", "C) Online System", "D) Offline System"],
-            "answer": "a"
-        },
-        {
-            "question": "What does RAM stand for?",
-            "options": ["A) Random Access Memory", "B) Readily Accessible Memory", "C) Rapid Access Memory", "D) None of the above"],
-            "answer": "a"
-        },
-        {
-            "question": "What does CPU stand for?",
-            "options": ["A) Central Processing Unit", "B) Central Programming Unit", "C) Computer Personal Unit", "D) None of the above"],
-            "answer": "a"
-        },
-        {
-            "question": "What does GPU stand for?",
-            "options": ["A) Graphics Processing Unit", "B) General Purpose Unit", "C) Graphical Processing Unit", "D) None of the above"],
-            "answer": "a"
-        },
-    ]
-
     for q in questions:
         print(q["question"])
         for option in q["options"]:
             print(option)
-        answer = input("Your answer (A/B/C/D): ").strip().lower()
-        if answer not in ['a', 'b', 'c', 'd']:
-            print('Invalid option format. Please choose A, B, C, or D.')
-            continue
+        try:
+            answer = input("Your answer (A/B/C/D): ").strip().lower()
+            while answer not in ['a', 'b', 'c', 'd']:
+                print("Invalid input. Please enter A, B, C, or D.")
+                answer = input("Your answer (A/B/C/D): ").strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            print("\nQuiz terminated by user.")
+            exit(0)
         
         if answer == q["answer"]:
             print('Correct!')
             score += 1
         else:
-            correct_option_text = next(opt for opt in q["options"] if opt[0].lower() == q["answer"])
-            print('Incorrect! The correct answer is', correct_option_text[3:])  # Display correct answer
+            correct_idx = ord(q["answer"]) - ord('a')
+            print('Incorrect! The correct answer is', q["options"][correct_idx][3:])
+    return score
 
+def main():
+    print("Welcome to the quiz game!")
+    playing = input("Do you want to play? (yes/no) ")
+    if playing.lower() != "yes":
+        return
+
+    print("Okay! Let's play :)!")
+    score = run_quiz(questions)
     print(f"You got {score} question(s) correct out of {len(questions)}.")
     print(f"You got {(score / len(questions)) * 100:.2f}% correct.")
 
