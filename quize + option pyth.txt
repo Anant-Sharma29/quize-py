@@ -1,4 +1,4 @@
-def main():
+def main
     print("Welcome to the quiz game!")
 
     playing = input("Do you want to play? (yes/no) ")
