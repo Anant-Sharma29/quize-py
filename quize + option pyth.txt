@@ -1,4 +1,4 @@
-def main
+def main():
     print("Welcome to the quiz game!")
 
     playing = input("Do you want to play? (yes/no) ")
@@ -31,8 +31,12 @@ def main
     ]
 
     score = run_quiz(questions)
-    print(f"You got {score} question(s) correct out of {len(questions)}.")
-    print(f"You got {(score / len(questions)) * 100:.2f}% correct.")
+    total = len(questions)
+    print(f"You got {score} question(s) correct out of {total}.")
+    if total > 0:
+        print(f"You got {(score / total) * 100:.2f}% correct.")
+    else:
+        print("No questions were asked.")
 
 def run_quiz(questions):
     score = 0
@@ -40,11 +44,13 @@ def run_quiz(questions):
         print(q["question"])
         for option in q["options"]:
             print(option)
+        valid_options = ['a', 'b', 'c', 'd']
         try:
-            answer = input("Your answer (A/B/C/D): ").strip().lower()
-            while answer not in ['a', 'b', 'c', 'd']:
-                print("Invalid input. Please enter A, B, C, or D.")
+            while True:
                 answer = input("Your answer (A/B/C/D): ").strip().lower()
+                if answer in valid_options:
+                    break
+                print("Invalid input. Please enter A, B, C, or D.")
         except (KeyboardInterrupt, EOFError):
             print("\nQuiz terminated by user.")
             exit(0)
